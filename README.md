@@ -14,7 +14,7 @@
 - Firebase: Authentication, Firestore (or Realtime Database), Hosting, etc.
 
 ## Screenshots
-_(Add your screenshots here)_
+
 ![Login Screen]<img width="1875" height="730" alt="image" src="https://github.com/user-attachments/assets/b32afc3b-69ac-44fb-baaa-c71de78e4acd" />
 
 ![Dashboard]<img width="1892" height="859" alt="image" src="https://github.com/user-attachments/assets/3e07d590-491c-48fd-b023-da5f34ef4814" />
