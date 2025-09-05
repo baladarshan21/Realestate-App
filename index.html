@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamProperties - Find Your Perfect Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>🏡 DreamProperties</h2>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#properties" class="nav-link">Properties</a>
+                <div class="nav-auth" id="navAuth">
+                    <a href="#login" class="btn btn--outline btn--sm">Login</a>
+                    <a href="#signup" class="btn btn--primary btn--sm">Sign Up</a>
+                </div>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="app">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-background"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Find Your Dream Property</h1>
+                        <p>Discover the best properties for sale and rent in prime locations</p>
+                        <div class="hero-search">
+                            <input type="text" class="form-control" placeholder="Enter location or property name" id="heroSearch">
+                            <select class="form-control" id="heroFilter">
+                                <option value="">All Properties</option>
+                                <option value="sale">For Sale</option>
+                                <option value="rent">For Rent</option>
+                            </select>
+                            <button class="btn btn--primary" onclick="searchProperties()">Search Properties</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What We Do Section -->
+            <section class="services">
+                <div class="container">
+                    <h2>What We Do</h2>
+                    <p>Comprehensive real estate services tailored to your needs</p>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">🏠</div>
+                            <h3>Buy Properties</h3>
+                            <p>Find and purchase your dream property with our expert guidance and comprehensive market knowledge</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">💰</div>
+                            <h3>Sell Properties</h3>
+                            <p>Get the best value for your property with our professional selling services and marketing expertise</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">🔑</div>
+                            <h3>Rent Properties</h3>
+                            <p>Discover rental properties that fit your lifestyle and budget with flexible lease terms</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">📈</div>
+                            <h3>Property Investment</h3>
+                            <p>Make smart investment decisions with our market expertise and investment advisory services</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Properties -->
+            <section class="featured-properties">
+                <div class="container">
+                    <h2>Featured Properties</h2>
+                    <p>Hand-picked properties from our premium collection</p>
+                    <div class="properties-grid" id="featuredPropertiesGrid">
+                        <div class="loading">Loading featured properties...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Properties for Sale/Rent -->
+            <section class="properties-section">
+                <div class="container">
+                    <h2>Explore Properties</h2>
+                    <div class="property-tabs">
+                        <button class="tab-btn active" onclick="showPropertyTab('sale')">For Sale</button>
+                        <button class="tab-btn" onclick="showPropertyTab('rent')">For Rent</button>
+                    </div>
+                    <div class="properties-grid" id="propertiesGrid">
+                        <div class="loading">Loading properties...</div>
+                    </div>
+                    <div class="text-center">
+                        <a href="#properties" class="btn btn--primary btn--lg">View All Properties</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter -->
+            <section class="newsletter">
+                <div class="container">
+                    <div class="newsletter-content">
+                        <h2>Stay Updated</h2>
+                        <p>Get the latest property listings and market insights delivered to your inbox</p>
+                        <form class="newsletter-form" id="newsletterForm">
+                            <input type="email" class="form-control" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn--primary">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Properties Page -->
+        <div id="properties-page" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Property Listings</h1>
+                    <p>Browse through our extensive collection of properties</p>
+                </div>
+                
+                <div class="filters-bar">
+                    <input type="text" class="form-control" placeholder="Search by location or name" id="searchInput">
+                    <select class="form-control" id="typeFilter">
+                        <option value="">All Types</option>
+                        <option value="sale">For Sale</option>
+                        <option value="rent">For Rent</option>
+                    </select>
+                    <button class="btn btn--primary" onclick="applyFilters()">Search</button>
+                    <button class="btn btn--outline" onclick="clearFilters()">Clear</button>
+                </div>
+
+                <div class="properties-grid" id="allPropertiesGrid">
+                    <div class="loading">Loading all properties...</div>
+                </div>
+
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be added dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login-page" class="page">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to your account to continue</p>
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="remember"> Remember me
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Sign In</button>
+                        </form>
+                        <div class="auth-links">
+                            <p>Don't have an account? <a href="#signup">Sign up here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Page -->
+        <div id="signup-page" class="page">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <h2>Create Account</h2>
+                        <p>Join us to access exclusive property listings</p>
+                        <form id="signupForm">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" required minlength="6">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" name="confirmPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="terms" required> I agree to the Terms & Conditions
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Create Account</button>
+                        </form>
+                        <div class="auth-links">
+                            <p>Already have an account? <a href="#login">Sign in here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏡 DreamProperties</h3>
+                    <p>Your trusted partner in finding the perfect property. We make real estate simple, transparent, and accessible.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#properties">Properties</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>📧 info@dreamproperties.com</li>
+                        <li>📞 +1 (555) 123-4567</li>
+                        <li>📍 123 Real Estate Ave, City, State</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank">Facebook</a>
+                        <a href="#" target="_blank">Twitter</a>
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DreamProperties. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Success Messages -->
+    <div id="messageModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle">Success</h3>
+            <p id="modalMessage">Operation completed successfully!</p>
+            <button class="btn btn--primary" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
